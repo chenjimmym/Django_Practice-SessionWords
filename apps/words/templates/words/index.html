@@ -14,12 +14,16 @@
             <input type="radio" name="color" value="red"> Red<br>
             <input type="radio" name="color" value="green"> Green<br>
             <input type="radio" name="color" value="blue"> Blue<br><br>
-            <input type="hidden" name="big_font" value="False">
-            <input type="checkbox" name="big_font" value="True"> show in BIG fonts!<br><br>
+            <input type="hidden" name="big_font" value="15">
+            <input type="checkbox" name="big_font" value="25"> show in BIG fonts!<br><br>
             <input type="submit" value="Add to Session">
+        </form><br>
+        <form action="/clear_session">
+            {% csrf_token %}
+            <input type="submit" value="Clear Session">
         </form>
         {% for data in request.session.all_inputs %}
-        <h3> {{data.word}} - {{data.color}} - {{data.font}}</h3>
+        <h3 style="color:{{data.color}}; font-size: {{data.font}}px">{{data.word}} - added on {{data.time}}</h3>
         {% endfor %}
 
     </body>
