@@ -4,27 +4,33 @@
         <title>Session Words</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     </head>
     <body>
-        <form action="/form_processing" method="post">
-            {% csrf_token %}
-            <h3>Add a new Word</h3>
-            <input type="text" name="input_word">
-            <p>Choose color:</p>
-            <input type="radio" name="color" value="red"> Red<br>
-            <input type="radio" name="color" value="green"> Green<br>
-            <input type="radio" name="color" value="blue"> Blue<br><br>
-            <input type="hidden" name="big_font" value="15">
-            <input type="checkbox" name="big_font" value="25"> show in BIG fonts!<br><br>
-            <input type="submit" value="Add to Session">
-        </form><br>
-        <form action="/clear_session">
-            {% csrf_token %}
-            <input type="submit" value="Clear Session">
-        </form>
-        {% for data in request.session.all_inputs %}
-        <h3 style="color:{{data.color}}; font-size: {{data.font}}px">{{data.word}} - added on {{data.time}}</h3>
-        {% endfor %}
-
+        <div class="row">
+            <div class="col-md-5" style="padding: 50px;">
+                <form action="/form_processing" method="post">
+                    {% csrf_token %}
+                    <h3>Add a new Word</h3>
+                    <input type="text" name="input_word">
+                    <p>Choose color:</p>
+                    <input type="radio" name="color" value="red"> Red<br>
+                    <input type="radio" name="color" value="green"> Green<br>
+                    <input type="radio" name="color" value="blue"> Blue<br><br>
+                    <input type="hidden" name="big_font" value="15">
+                    <input type="checkbox" name="big_font" value="25"> show in BIG fonts!<br><br>
+                    <input type="submit" value="Add to Session">
+                </form><br>
+                <form action="/clear_session">
+                    {% csrf_token %}
+                    <input type="submit" value="Clear Session">
+                </form>
+            </div>
+            <div class="col-md-7" style="padding: 50px;">
+            {% for data in request.session.all_inputs %}
+            <h3 style="color:{{data.color}}; font-size: {{data.font}}px">{{data.word}} - added on {{data.time}}</h3>
+            {% endfor %}
+            </div>
+        </div>
     </body>
 </html>
